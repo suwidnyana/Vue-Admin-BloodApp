@@ -1,20 +1,33 @@
 <template>
   <div class="container margin-atas">
+    
     <b-card>
+      
       <b-table striped hover responsive :items="Donors" :key="key">
-    </b-table>
+      </b-table>
+         
+     <button @click="createPDF">Download PDF</button>
     </b-card>
+
   </div>
 </template>
 
 <script>
+import jsPDF from 'jspdf'
 import { DonorRef, profileRef } from '../firebase'
 export default {
     name: 'Donor',
     data() {
         return {
             pendonor : DonorRef,
-            Donors: []
+            Donors: [],
+            items: [
+
+              { name: 'suwidnyana'},
+               { name: 'suwidnyana'}
+            ]
+
+
         }
     },
     mounted() {
@@ -36,7 +49,7 @@ export default {
               detail: item.detail,
               goldar: item.goldar,
               nama_penerima: snapshotPenerima[0].nama,
-              nama_pemesan: snapshotPemesan[0].nama,
+              Pendonor: snapshotPemesan[0].nama,
               permintaan: item.permintaan,
               status: item.status,
               tempat: item.tempat,
@@ -49,7 +62,7 @@ export default {
               detail: item.detail,
               goldar: item.goldar,
               nama_penerima: '',
-              nama_pemesan: snapshotPemesan[0].nama,
+              Pendonor: snapshotPemesan[0].nama,
               permintaan: item.permintaan,
               status: item.status,
               tempat: item.tempat,
@@ -59,6 +72,14 @@ export default {
         });
       });
     },
+
+    methods: {
+    createPDF () {
+       var doc = new jsPDF()
+      doc.text('Hello world!', 10, 10)
+      doc.save('a4.pdf')
+      }
+    }
 }
 </script>
 
