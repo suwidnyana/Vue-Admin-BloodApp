@@ -10,7 +10,10 @@ const config = {
     appId: "1:227065484825:web:602acb898141a13c"
   };
   
- export const fire = firebase.initializeApp(config);
+
+
+
+export const fire = firebase.initializeApp(config);
   
 export const db = fire.database()
   
